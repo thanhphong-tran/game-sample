@@ -1,0 +1,21 @@
+{
+  "name": "nodeapi",
+  "author": "RX-TTP",
+  "license": "CopyRight 2017",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "crypto-js": "^3.1.9-1",
+    "formidable": "^1.1.1",
+    "jsonwebtoken": "^8.1.0",
+    "moment": "^2.18.1",
+    "mongoose": "^4.6.8",
+    "request": "^2.81.0"
+  }
+}

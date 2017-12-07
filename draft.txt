@@ -1,0 +1,8 @@
+app_settings: {
+    is_formal_login_enable: true,
+    is_facebook_login_enable: true,
+    is_google_login_enable: true,
+    is_quickplay_enable: true,
+    is_inapp_purchase_enable: true,
+    is_card_purchase_enable: true,
+}
