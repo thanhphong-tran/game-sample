@@ -33,6 +33,7 @@ var server = http.createServer(function (req, res) {
       res.data = data;
       res.setHeader('Content-Type', 'application/json');
       res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, X-Access-Token, Content-Type, Accept, Authorization, Access-Control-Allow-Credentials");
       var whiteList = [];
       var routes    = [];
 

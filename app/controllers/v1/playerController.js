@@ -24,7 +24,7 @@ controller.prototype.info = function() {
 
 // Web API
 
-controller.prototype.POSTauth = function() {
+controller.prototype.auth = function() {
     let rxdata = this.res.data;
     let decoded = this.validateData(rxdata.params.data, pri.jwtconf.secret);
 
@@ -53,7 +53,7 @@ controller.prototype.POSTauth = function() {
     });
 };
 
-controller.prototype.POSTinapp = function() {
+controller.prototype.inapp = function() {
     let rxdata = this.res.data;
     let decoded = this.validateData(rxdata.params.data, pri.jwtconf.secret);
 
@@ -72,7 +72,7 @@ controller.prototype.POSTinapp = function() {
     });
 };
 
-controller.prototype.POSTcard = function() {
+controller.prototype.card = function() {
     let rxdata = this.res.data;
     let decoded = this.validateData(rxdata.params.data, pri.jwtconf.secret);
 
