@@ -24,7 +24,7 @@ controller.prototype.info = function() {
 
 // Web API
 
-// Params: character_name, player_id, server_id
+// Params: character_name, player_id, server_id -> role_id, access_token
 controller.prototype.create = function() {
     let rxdata = this.res.data;
     let decoded = this.validateData(rxdata.params.data, pri.jwtconf.secret);
@@ -47,7 +47,7 @@ controller.prototype.create = function() {
     });
 };
 
-// Params: role_id, server_id
+// Params: role_id, server_id -> role_id, access_token
 controller.prototype.auth = function() {
     let rxdata = this.res.data;
     let decoded = this.validateData(rxdata.params.data, pri.jwtconf.secret);
@@ -61,7 +61,7 @@ controller.prototype.auth = function() {
     });
 };
 
-// Params: role_id, server_id, item_id
+// Params: role_id, server_id, item_id -> amount
 controller.prototype.inapp = function() {
     let rxdata = this.res.data;
     let decoded = this.validateData(rxdata.params.data, pri.jwtconf.secret);
@@ -81,7 +81,7 @@ controller.prototype.inapp = function() {
     });
 };
 
-// Params: role_id, server_id, card_amount
+// Params: role_id, server_id, card_amount -> amount
 controller.prototype.card = function() {
     let rxdata = this.res.data;
     let decoded = this.validateData(rxdata.params.data, pri.jwtconf.secret);

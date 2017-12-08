@@ -54,9 +54,9 @@ var server = http.createServer(function (req, res) {
         //console.log(err);
         //res.data.response({success: -1, msg: 'Not support', exit: false});
         if (err.code == 'MODULE_NOT_FOUND' || err.message === 'controllerObj[actionName] is not a function') {
-            res.end({success: -1, msg: 'Not support'});
+            res.response({success: -1, msg: 'Not support'});
         } else {
-            res.end({success: -1, msg: err.message});
+            res.response({success: -1, msg: err.message});
             throw err;
         }
       }
