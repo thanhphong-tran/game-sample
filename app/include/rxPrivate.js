@@ -16,7 +16,7 @@ pri.scribeconf = {
 };
 
 pri.jwtconf = {
-    'secret': 'gamesdk@6969~!~6969',
+    'secret': 'app_secret_6969',
     'tokenExpiresIn': '30d'
 };
 

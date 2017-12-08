@@ -24,28 +24,36 @@ controller.prototype.info = function() {
 
 // Web API
 
+// Params: character_name, player_id, server_id
+controller.prototype.create = function() {
+    let rxdata = this.res.data;
+    let decoded = this.validateData(rxdata.params.data, pri.jwtconf.secret);
+
+    let duplicatedData = { player_id: decoded.player_id, server_id: decoded.server_id };
+    this.preventDupplicate(Player, duplicatedData, 0, function() {
+        let newPlayer = new Player({
+            name: decoded.character_name,
+            server_id: decoded.server_id,
+            player_id: decoded.player_id
+        });
+
+        return newPlayer.save(function(err) {
+            if (err) { return rxdata.response({ success: -1, msg: err.message }); }
+
+            let jwtData = {role_id: newPlayer._id};
+            newPlayer.authorization = rxu.signData(jwtData, pri.jwtconf.secret);
+            rxdata.response({data: { role_id: newPlayer.id, athorization: newPlayer.authorization }});
+        });
+    });
+};
+
+// Params: role_id, server_id
 controller.prototype.auth = function() {
     let rxdata = this.res.data;
     let decoded = this.validateData(rxdata.params.data, pri.jwtconf.secret);
 
-    Player.findOne({ player_id: decoded.player_id, server_id: decoded.server_id }).exec(function(err, player) {
-        if (err) { return rxdata.response({ success: -1, msg: err.message }); }
-
-        if (!player) {
-            let newPlayer = new Player({
-                name: decoded.player_name,
-                server_id: decoded.server_id,
-                player_id: decoded.player_id
-            });
-
-            return newPlayer.save(function(err) {
-                if (err) { return rxdata.response({ success: -1, msg: err.message }); }
-
-                let jwtData = {role_id: newPlayer._id};
-                newPlayer.authorization = rxu.signData(jwtData, pri.jwtconf.secret);
-                rxdata.response({data: { role_id: newPlayer.id, athorization: newPlayer.authorization }});
-            });
-        }
+    Player.findOne({ _id: decoded.role_id }).exec(function(err, player) {
+        if (err || !player) { return rxdata.response({ success: -1, msg: err.message }); }
 
         let jwtData = {role_id: player._id};
         player.authorization = rxu.signData(jwtData, pri.jwtconf.secret);
@@ -53,6 +61,7 @@ controller.prototype.auth = function() {
     });
 };
 
+// Params: role_id, server_id, item_id
 controller.prototype.inapp = function() {
     let rxdata = this.res.data;
     let decoded = this.validateData(rxdata.params.data, pri.jwtconf.secret);
@@ -72,6 +81,7 @@ controller.prototype.inapp = function() {
     });
 };
 
+// Params: role_id, server_id, card_amount
 controller.prototype.card = function() {
     let rxdata = this.res.data;
     let decoded = this.validateData(rxdata.params.data, pri.jwtconf.secret);
